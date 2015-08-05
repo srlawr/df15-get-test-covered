@@ -76,7 +76,7 @@ Examine the code to quickly work out what it does.
 
 Once saved, go to "Test" in the developer console top menu, and select "New Run". Pick the test class and move it over to the right hand list, and click "Run". At the bottom of the page you should see your test class queued up (possibly with an orange circle). Eventually it will run and be marked with a green tick to indicate it has passed. You may wish to click around to see the details of the results.
 
-Go back to the tab containing our original code, and at the top click the drop down to show the code coverage. You can see we have achieved 83%. If you click the "Code Coverage" drop down and select our test class, you can see which code is covered - and which is not.
+Go back to the tab containing our original code, and at the top click the drop down to show the code coverage. You can see we have achieved 83%, you can also see which code is covered - and which is not.
 
 ![Coverage example 1](https://raw.githubusercontent.com/srlawr/df15-get-test-covered/master/devconsolecoverage1.jpg)
 
