@@ -16,7 +16,7 @@ Quickly complete the following steps to create a class, which contains 6 lines o
 ![Create a new file](https://raw.githubusercontent.com/srlawr/df15-get-test-covered/master/developerconsolefilenew.jpg)
 
 3. Call the class "WageCalculator"
-4. Copy and paste the following code into the file, and save it. You should see "Saving" in the title briefly, and then the class will be created in your org.
+4. Copy and paste the following code into the file, and save it.
 
 ```
 public class WageCalculator {
@@ -39,6 +39,8 @@ public class WageCalculator {
 ```
 
 Now we have some code in place, if you switch to the "Test" tab in the Developer console, you should see we have 0% coverage of this class, so it's time to do something about that.
+
+![No lines covered](https://raw.githubusercontent.com/srlawr/df15-get-test-covered/master/devconsolenocoverage.jpg)
 
 ## Step 2 - Create a test class and setup your test conditions
 
