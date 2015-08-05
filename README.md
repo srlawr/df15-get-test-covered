@@ -8,40 +8,99 @@ Automated testing is not just a good idea to keep your code and projects stable 
 # Steps
 
 ## Step 1 - Create some code to cover
-Quickly complete the following steps to create a class, which contains XYZ lines of testable code.
+Quickly complete the following steps to create a class, which contains 6 lines of testable code.
 
 1. From your developer edition, click on your name in the top right corner, and launch the developer console from the drop-down menu.
 2. In the developer console, click "File" and then use "New" to create a new Apex Class.
-3. Call the class ""
+
+![Create a new file](https://raw.githubusercontent.com/srlawr/df15-get-test-covered/master/developerconsolefilenew.jpg)
+
+3. Call the class "WageCalculator"
 4. Copy and paste the following code into the file, and save it. You should see "Saving" in the title briefly, and then the class will be created in your org.
+
+```
+public class WageCalculator {
+
+    /* A simple task to award overtime pay if more than 7.5 hours are worked */
+    public static Double processPayment(Double amount, Double hours) {
+        
+        Double totalPay = 0;
+        
+        if(hours > 7.5) {
+            totalPay = hours * (amount * 1.5);
+        } else {
+            totalPay = hours * amount;
+        }
+        
+        return totalPay;
+    }
+    
+}
+```
 
 Now we have some code in place, if you switch to the "Test" tab in the Developer console, you should see we have 0% coverage of this class, so it's time to do something about that.
 
 ## Step 2 - Create a test class and setup your test conditions
 
-1. Go back to "File" and use "New" to create another class. Call this one "test".
+1. Go back to "File" and use "New" to create another class. Call this one "WageCalculatorTest".
 2. In Salesforce we typically use @Annotations to indicate test classes and methods. Paste the following into your new test class to get the ball rolling
 
+```
+@isTest
+public class WageCalculatorTest {
+
+    
+}
+```
 
 The @isTest declaration at the top tells Salesforce this is a test class, so it will appear in the relevant lists. Test code does not contribute to your overall Apex usage limit, so writing plenty of tests will not hinder you.
 
-Test classes do not have access to existing data in your Salesforce org, so the @testSetup method is called before each test method is run to insert our pre-defined test data. In this case we need to insert a XY and Z
+Now, paste this first test method into the class, which will test that when an employee works less than 7.5 hours, they get their basic pay.
 
-Now, paste this first test mehtod into the class, which will test that X and Y are true when Z happens.
+```
+@isTest
+static void EmployeeNormalHours_RecievesNormalPay() {
+   
+    Double payRate = 10.5;
+    Double hours = 5;
+    
+    Double totalPay = CalculateWage.processPayment(payRate, hours);
+    
+    System.assertEquals(52.5, totalPay);
+}
+```
 
+Examine the code to quickly work out what it does.
 
 Once saved, go to "Test" in the developer console top menu, and select "New Run". Pick the test class and move it over to the right hand list, and click "Run". At the bottom of the page you should see your test class queued up (possibly with an orange circle). Eventually it will run and be marked with a green tick to indicate it has passed. You may wish to click around to see the details of the results.
 
-Go back to the tab containing our original code, and at the top click the drop down to show the code coverage. You can see we have achieved AA%, lets got back to the test class and complete this testing.
+Go back to the tab containing our original code, and at the top click the drop down to show the code coverage. You can see we have achieved 83%. If you click the "Code Coverage" drop down and select our test class, you can see which code is covered - and which is not.
 
-Paste the following method into the the test class alongside the first. You can see that this method now tests A and B.
+![Coverage example 1](https://raw.githubusercontent.com/srlawr/df15-get-test-covered/master/devconsolecoverage1.jpg)
+
+Let's get back to the test class and complete this testing.
+
+Paste the following method into the the test class alongside the first. You can see that this method now tests the scenario in which a wage is being calculated in overtime, by increasing the "hours" variable being passed into the class.
+
+```
+@isTest
+static void EmployeeOvertimeHours_RecievesOvertimePay() {
+   
+    Double payRate = 10.5;
+    Double hours = 8;
+    
+    Double totalPay = CalculateWage.processPayment(payRate, hours);
+    
+    System.assertEquals(126, totalPay);
+}
+```
 
 Save the file and go to "Test" in the top menu and "Re-run". Once the test has been queued and executed, if you return to the original code, you should see you now have 100% coverage between these two test methods, and your work is complete!
 
+![Coverage example 2](https://raw.githubusercontent.com/srlawr/df15-get-test-covered/master/devconsolecoverage2.jpg)
+
 # Summary
 
-Writing test classes and methods is really simple and quick in Salesforce, and using the @testSetup annotation, you can be sure they will work as expected when run because the data over which they run is specifically defined in the test class itself.
+Writing test classes and methods is really simple and quick in Salesforce. The @isTest annotation indicates test classes and methods easily, and the System "assert" libary makes it easy to ensure you Apex code is operating in the correct fashion.
 
 Running tests and seeing their effects in the Developer Console is an effective way of managing and monitoring your coverage levels.
-
-# Resources
